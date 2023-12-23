@@ -8,4 +8,4 @@ Se uso:
 - TKinter
 - Pycharm
 
-> ⚠️ **ATENCIÓN**: Cree una variable de entorno con la api key de elevenlabs
+⚠️ **ATENCIÓN**: Cree una variable de entorno con la api key de elevenlabs
