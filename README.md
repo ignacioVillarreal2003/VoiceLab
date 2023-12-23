@@ -7,3 +7,5 @@ Se uso:
 - Speech Recognition
 - TKinter
 - Pycharm
+
+> ⚠️ **ATENCIÓN**: Cree una variable de entorno con la api key de elevenlabs
