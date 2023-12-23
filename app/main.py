@@ -1,9 +1,13 @@
+import string
+
 from elevenlabs import generate, set_api_key, voices, save, Voice, VoiceSettings, clone
 import os
 from tkinter import *
 from tkinter import messagebox as MessageBox, filedialog
 import speech_recognition as sr
 import time
+from translate import Translator
+
 
 # Key de la Api
 apiKey = os.environ["API_KEY"]
@@ -99,6 +103,14 @@ def abrirSelectorArchivo():
 def desplegarInformacion():
     MessageBox.showinfo('Sobre mí', 'Enlace a mi perfil de LinkedIn: https://www.linkedin.com/in/ignacio-villarreal-518804267/')
 
+def traducirAIngles():
+    text = texto.get()
+    print("Texto original:", repr(text))
+    text_sin_puntuacion = text.translate(str.maketrans('', '', string.punctuation))
+    translator = Translator(from_lang='spanish', to_lang='english', encoding='utf-8')
+    nuevoTexto = translator.translate(text_sin_puntuacion)
+    print("Texto traducido:", repr(nuevoTexto))
+    guardarVozNueva(nuevoTexto)
 
 
 """"""""" Interfaz """""""""
@@ -120,7 +132,7 @@ root.geometry(f"700x500+{x_centro}+{y_centro}")
 
 # Descripcion
 custom_font = ("Helvetica", 14)
-instrucciones = Label(root, text='Convierte texto a voz.\n Ingrese un texto y seleccione una voz.\n', font=custom_font)
+instrucciones = Label(root, text='Convierte texto a voz.\n\n- Puede ingresar un texto, seleccionar una voz y darle a convertir texto a voz.\n- Puede seleccionar un archivo, seleccionar una voz y darle a convertir voz a voz.\n- Puede ingresar un texto, seleccionar una voz y darle a convertir español a inglés.\n', font=custom_font)
 instrucciones.grid(row=0, column=0, pady=20, columnspan=2)
 
 # Input URL
@@ -135,22 +147,26 @@ variable.set(listaVoces[0]['name'])
 # Crear el menú de opciones
 opciones = [f"{dicc['name']} ({dicc['gender']})" for dicc in listaVoces]
 menu_opciones = OptionMenu(root, variable, *opciones)
-menu_opciones.grid(row=2, column=0, pady=20, columnspan=2)
+menu_opciones.grid(row=2, column=0, pady=10, columnspan=2)
 
 boton = Button(root, text='Convertir Texto a Voz', command=convertirTextoAVoz)
-boton.grid(row=3, column=0, pady=20, columnspan=2)
+boton.grid(row=3, column=0, pady=10, columnspan=2)
 
 # Crear un botón que abrirá el selector de archivos
 boton_selector = Button(root, text="Seleccionar Archivo", command=abrirSelectorArchivo)
-boton_selector.grid(row=4, column=0, pady=20, columnspan=2)  # Cambiar el nombre de la variable aquí
+boton_selector.grid(row=4, column=0, pady=10, columnspan=2)  # Cambiar el nombre de la variable aquí
 
 # Convertir Voz a Voz
 boton2 = Button(root, text='Convertir Voz a Voz', command=convertirVozAVoz)
-boton2.grid(row=5, column=0, pady=20, columnspan=2)
+boton2.grid(row=5, column=0, pady=10, columnspan=2)
+
+# Convertir Español a Ingles
+boton3 = Button(root, text='Convertir español a ingles', command=traducirAIngles)
+boton3.grid(row=6, column=0, pady=10, columnspan=2)
 
 
 # Centrar elementos verticalmente en la fila
-for i in range(6):
+for i in range(7):
     root.grid_rowconfigure(i, weight=1)
 
 # Centrar elementos horizontalmente en la columna
