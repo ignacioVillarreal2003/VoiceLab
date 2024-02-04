@@ -1,11 +1,26 @@
-# VoiceLab
+# PyVoiceLab
 
-Pequeño proyecto de python para convertir texto a voz o voz a voz. 
-Se uso:
+## Descripción 
+App sencilla que acorta URL´s
 
-- ElevenLabs
-- Speech Recognition
-- TKinter
-- Pycharm
+## Instalación
+1- Clonar el Repositorio:
 
-⚠️ **ATENCIÓN**: Cree una variable de entorno con la api key de elevenlabs
+```
+git clone https://github.com/ignacioVillarreal2003/VoiceLab.git
+cd PyVoiceLab
+```
+
+2- Instalar Dependencias:
+
+```
+pip install elevenlabs
+pip install SpeechRecognition
+pip install translate
+```
+
+3- Ejecutar la Aplicación:
+
+```
+python pyvoicelab.py
+```
